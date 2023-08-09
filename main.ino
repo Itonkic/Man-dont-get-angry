@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "globals.h"
 int player_counter = 0;
-
+int active[] = { 0, 0, 0, 0 };
 int broj = 0;
 int playerPosition = 0;
 int selectedPiece = -1;
@@ -51,13 +51,12 @@ void setup() {
   Serial.print(" starts the game with the highest roll: ");
   Serial.println(highestRoll);
   /*first roll 3 times*/
-
   for (int i = 0; i < player_counter; i++) {
-    //  Serial.print("Player :");Serial.println(currentPlayer);Serial.println(player_counter);
-    playerfirstTurn(currentPlayer);
-    //   Serial.print("Trenutni player:");Serial.println(currentPlayer);
+    //Serial.print("Player :");Serial.println(currentPlayer);Serial.println(player_counter);
+    playerfirstTurn(currentPlayer, 3);
+    //Serial.print("Trenutni player:");Serial.println(currentPlayer);
     currentPlayer = currentPlayer + 1;
-    /*   Serial.print("Player + 1 :");Serial.println(currentPlayer);
+    /*Serial.print("Player + 1 :");Serial.println(currentPlayer);
     Serial.print("player counter: ");Serial.println(player_counter);
     Serial.print("for count "); Serial.println(i);*/
     if (currentPlayer == player_counter) {
@@ -70,46 +69,34 @@ void setup() {
 
 void loop() {
   qsor();
-  while(!checkwin()){
-  for (int i = 0; i <= 3; i++) {
-    //for (int k = 0; k <= 3; k++) {
-    Serial.print("Player no: ");
-    Serial.print(i);
-    // Serial.print(" Player figure: ");
-    //   Serial.print(k);
-    Serial.print("Position: ");
-    Serial.println(playerPositions[i][0]);
-    //   }
-  }
-  //Serial.println(playerPositions[currentPlayer][0]);
-  for (int i = 0; i < player_counter; i++) {
-    //updateLEDStrip();
-    Serial.print("current player: ");
-    Serial.print(currentPlayer);
-    Serial.print(" playable figures: ");
-    Serial.println(playablefigures[currentPlayer]);
-
-    if (playablefigures[currentPlayer] >= 1) {
-      playerTurn(currentPlayer);
-      if (dice_roll == 6) {
-        currentPlayer = currentPlayer;
-      } else {
-        currentPlayer = currentPlayer + 1;
-      }
-      delay(1000);  // Add a small delay between players' turns (optional)
-    } else {
-      nofigures(currentPlayer);
-      if (dice_roll == 6) {
-        currentPlayer = currentPlayer;
-      } else {
-        currentPlayer = currentPlayer + 1;
-      }
+  while (!checkwin()) {
+    for (int i = 0; i <= 3; i++) {
+      //for (int k = 0; k <= 3; k++) {
+      Serial.print("Player no: ");
+      Serial.print(i);
+      // Serial.print(" Player figure: ");
+      //   Serial.print(k);
+      Serial.print("Position: ");
+      Serial.println(playerPositions[i][0]);
+      //   }
     }
-    if (currentPlayer == player_counter && dice_roll != 6) {
-      currentPlayer = 0;
-    }
-    
-
+    //Serial.println(playerPositions[currentPlayer][0]);
+    for (int i = 0; i < player_counter; i++) {
+      coun = 0;
+      //updateLEDStrip();
+      Serial.print("current player: ");
+      Serial.print(currentPlayer);
+      Serial.print(" playable figures: ");
+      Serial.println(playablefigures[currentPlayer]);
+      if (active_figures(currentPlayer) >= 1) {
+        playerTurn(currentPlayer);
+        delay(1000);  // Add a small delay between players' turns (optional)
+      } else {
+        playerfirstTurn(currentPlayer, 1);
+      }
+      if (currentPlayer == player_counter) {
+        currentPlayer = 0;
+      }
     }
   }
 }
