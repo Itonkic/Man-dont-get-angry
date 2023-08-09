@@ -1,18 +1,20 @@
 // globals.h
 #ifndef GLOBALS_H
 #define GLOBALS_H
-#define BUTTON1_PIN 0
-#define BUTTON2_PIN 1
-#define BUTTON3_PIN 2
-#define BUTTON4_PIN 3
-#define BUTTON5_PIN 4
-#define MAX_PLAYERS 5  // Set the maximum number of players, adjust as needed
-#define MAX_PIECES 10
+#define BUTTON1_PIN 1
+#define BUTTON2_PIN 2
+#define BUTTON3_PIN 5
+#define BUTTON4_PIN 6
+#define BUTTON5_PIN 7
+#define MAX_PLAYERS 4  // Set the maximum number of players, adjust as needed
+#define MAX_PIECES 4
 
 extern int player_counter;
 extern int broj;
+extern int active[4];
 extern int new_position;
 extern int win;
+extern int coun;
 //extern int player_count;
 extern int selectedPiece;
 extern int playerPosition;
