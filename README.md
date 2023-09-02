@@ -1,5 +1,5 @@
 # Man-dont-get-angry
-Man dont get angry game ESP8266 (STM32) WS2812
+Man dont get angry game STM32 WS2812
 
 Butons are connected to pins PA0-PA5
 
